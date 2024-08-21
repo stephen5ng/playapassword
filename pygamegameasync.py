@@ -166,9 +166,10 @@ class Game:
 
     async def next_answer(self):
         self.answer_display.answer = self.answers.pop() if self.answers else "GAME OVER"
-
+        self.draw()
 
 async def main():
+    global game_name
     start = True
     window = pygame.display.set_mode(
         (SCREEN_WIDTH*SCALING_FACTOR, SCREEN_HEIGHT*SCALING_FACTOR))
@@ -176,7 +177,7 @@ async def main():
     if platform.system() != "Darwin":
         run_text = RunText()
         run_text.process()
-
+        game_name = run_text.args.game
         matrix = run_text.matrix
         offscreen_canvas = matrix.CreateFrameCanvas()
 
